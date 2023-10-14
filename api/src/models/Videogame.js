@@ -38,7 +38,6 @@ module.exports = (sequelize) => {
       unique: false
     }
   },{
-    timestamps: false,
-    initialAutoIncrement: 2000,
+    timestamps: false
   });
 };
