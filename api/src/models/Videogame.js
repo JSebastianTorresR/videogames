@@ -27,13 +27,13 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: false
     },
-    launchDate: {
+    released: {
       type: DataTypes.DATE,
       allowNull: false,
       unique: false
     },
     rating: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: true,
       unique: false
     }
