@@ -15,7 +15,6 @@ const fixGenres = (arr) => {
 const getGenresApi = async () => {
     try {
         const {data} = await axios(`${API}/genres?key=${API_KEY}`)
-        // if(!data.length) throw new Error("no se pudo obtener generos de la api")
         const {results} = data
         const genres = fixGenres(results)
         const created = await Promise.all(genres.map(genre => Genre.create({name: genre})))

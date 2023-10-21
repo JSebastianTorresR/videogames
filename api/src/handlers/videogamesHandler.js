@@ -28,9 +28,9 @@ const getVGNameHandler = async (req, res) => {
 }
 
 const postVGHandler = async (req,res) => {
-    const {name, platforms, image, released, rating, genres} = req.body 
+    const {name, platforms, description, image, released, rating, genres} = req.body 
     try {
-        const game = await postVideoGame(name, platforms, image, released, rating, genres)
+        const game = await postVideoGame(name, platforms, description, image, released, rating, genres)
         return res.status(200).json(game)
     } catch (error) {
         return res.status(400).json({error: error.message})

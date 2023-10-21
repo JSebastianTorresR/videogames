@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {Videogame} = require("../db")
+const {Videogame, Genre} = require("../db")
 const axios = require("axios")
 const { API, API_KEY} = process.env
 
@@ -68,10 +68,13 @@ const getVideoGamesName = async (name) => {
     }
 }   
 
-const postVideoGame = async (name, platforms, image, released, rating, genres) => {
+const postVideoGame = async (name, platforms, description, image, released, rating, genres) => {
     try {
-        const game  = await Videogame.create({name, platforms, image, released, rating})
-        game.setGenres(genres)
+        const game  = await Videogame.create({name, platforms, description, image, released, rating})
+        await Promise.all(genres.map(async (genre) => {
+            const DBGenre = await Genre.findOne({ where: { name: genre}})
+            game.addGenre(DBGenre)
+        }))
         return game
     } catch (error) {
         throw new Error(`No se ha podido crear el Juego ${name}, error: ${error.message}`)
