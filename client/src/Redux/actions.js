@@ -24,7 +24,8 @@ export const getGamesAsync = (currentPage) => async (dispatch) => {
 
 
 const getGameId = async (id) => {
-    const {data} = await 
+    const {data} = await axios.get(`${API}/${id}`)
+    return data
 }
 
 
