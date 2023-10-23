@@ -1,13 +1,213 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+    text-decoration: none;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+.ld-body{
+    background-image: url("https://images5.alphacoders.com/614/614955.png");
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.ld-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mn-ld{
+    height: 79vh;
+}
+/* .mn-ld{
+    background-image: url("https://images5.alphacoders.com/614/614955.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position-y: 35%;
+    height: 79vh;
+    margin: 0;
+} */
+
+.sc-ld{
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    margin: 0 20vw;
+}
+
+.ft-ld{
+    display: flex;
+    height: 68px;
+    justify-content: space-between;
+    padding: 0 50px;
+    background-color: lightcoral;
+}
+.main-hm{
+    background-color: #E57734;
+    display: flex;
+}
+
+aside{
+    background-color:  #B6ACAD;
+}
+
+aside h1{
+    margin: 100px 0;
+    padding: 0 20px;
+    color: #3E2922;
+    text-decoration: underline;
+}
+
+.hm-mn{
+    display: flex;
+
+}
+ 
+
+.menu-cards{
+    display: flex;
+    flex-direction: row;
+    background-color: #F8EBCF;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    align-items: center;
+}
+.cards-container{
+    min-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    width: 350px;
+    margin: 15px;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 25px;
+    background-color: #01757a;
+}
+.card img{
+    background-color: #F6CDA6;
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+}
+
+.card h3{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+    color: #F8EBCF;
+}
+
+.genres-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.tipos-card h4{
+    color: #F8EBCF;
+}
+
+#search-input{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    width: 200px;
+    padding: 0 20px
+}
+
+#search-button{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+    outline: none;
+}
+
+.form-search{
+    background-color: #FFF;
+    display: flex;
+    width: 300px;
+    height: 30px;
+    border-radius: 25px;
+}
+
+#form-fp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2018/11/analisis-pokemon-lets-go-pikachu-eevee_7.jpg?tf=3840x) no-repeat;
+    background-size: cover ;
+    background-position: center;
+}
+
+.input-container{
+    width: 400px;
+    height: 600px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-container h1{
+    color: #000;
+}
+
+.input-box{
+    border-bottom: 2px #000 solid;
+    position: relative;
+    width: 300px;
+    height: 40px;
+    margin: 10px 0;
+}
+.input-box label{
+    position: absolute;
+    top: 17%;
+    left: 5px;
+    transform: translateY(-40%);
+    font-size: 1em;
+    pointer-events: none;
+    color: #000;
+}
+.input-box input{
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #000
+}
+.input-container button{
+    width: 80%;
+    height: 40px;
+    background: #FFF;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #000;
+    font-weight: 700;
+}
+select{
+    position: relative;
+    top: 50%
 }
