@@ -28,6 +28,21 @@ const getGameId = async (id) => {
     return data
 }
 
+export const getGameIdAsync = (id) => async (dispatch) => {
+    try {
+        const IdGame = await getGameId(id)
+        dispatch({
+            type: "GET_ID_GAME",
+            payload: IdGame
+        })
+    } catch (error) {
+        dispatch({
+            type: "GET_ID_GAME_ERROR",
+            error: error.message
+        })
+    }
+}
+
 
 export const nextPage = () => {
     return {

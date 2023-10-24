@@ -13,7 +13,7 @@ function App() {
         <Route path="/" Component={LandingPage} />
         <Route path="/home" Component={HomePage} />
         <Route path="/crear" Component={FormPage} />
-        <Route path="/pokemon/:id" Component={DetailPage} />
+        <Route path="/games/:ID" Component={DetailPage} />
       </Routes>
     </>
   );
