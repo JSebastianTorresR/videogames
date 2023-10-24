@@ -36,7 +36,7 @@ const fixPlatforms = (arr) =>{
     return platforms
 }
 
-const getVideoGamesApi = async (page=1) => {
+const getVideoGamesApi = async (page=1, sort="A-Z") => {
     try {
         if(!games.length){
             for(let i = 1; i <= 5; i++){
@@ -47,6 +47,8 @@ const getVideoGamesApi = async (page=1) => {
                 }
             }
         }
+        if(sort == "A-Z")return [...games].sort((x,y) => x.name.localCompare(y.name))
+        if(sort == "Z-A")games.reverse()
         const slice = (page - 1) * 15
         return games.slice(slice, 15*page)
     } catch (error) {
@@ -66,10 +68,10 @@ const getVideoGamesId = async (id) => {
     } 
 }
 
-const getVideoGamesName = async (name, page) => {
+const getVideoGamesName = async (name, page, sort) => {
     try {
         if(!games.length) {
-            let response = await getVideoGamesApi(page)
+            let response = await getVideoGamesApi(page, sort)
             if(!name) return response
         }
         if(name){

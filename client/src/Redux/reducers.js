@@ -4,7 +4,9 @@ const initialState = {
     favorites: [],
     currentGame: {},
     search: "",
-    searchResults: []
+    searchResults: [],
+    filter: null,
+    sort: null,
 }
 
 const Reducer = (state = initialState, action) => {
@@ -20,6 +22,7 @@ const Reducer = (state = initialState, action) => {
                 currentGame: action.payload
             }
         case "NEXT_PAGE":
+            if(state.currentPage === 7) return state
             return{
                 ...state,
                 currentPage: state.currentPage + 1

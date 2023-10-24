@@ -7,9 +7,9 @@ const getVideoGames = async (page) =>{
     return data
 }
 
-export const getGamesAsync = (currentPage) => async (dispatch) => {
+export const getGamesAsync = (currentPage, sort) => async (dispatch) => {
     try {
-        const apiGames = await getVideoGames(currentPage);
+        const apiGames = await getVideoGames(currentPage, sort);
         dispatch({
             type: "GET_VIDEOGAMES_SUCCES",
             payload: apiGames,
