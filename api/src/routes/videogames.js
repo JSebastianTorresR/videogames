@@ -1,4 +1,4 @@
-const {getVGApiHandler, getVGNameHandler, getVGIdHandler, postVGHandler} = require("../handlers/videogamesHandler")
+const { getVGNameHandler, getVGIdHandler, postVGHandler} = require("../handlers/videogamesHandler")
 const {Router} = require("express")
 
 const VGRouter = Router()
