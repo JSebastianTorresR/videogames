@@ -3,7 +3,6 @@ const {Router} = require("express")
 
 const VGRouter = Router()
 
-VGRouter.get("/", getVGApiHandler)
 VGRouter.get("/", getVGNameHandler)
 VGRouter.get("/:id", getVGIdHandler)
 VGRouter.post("/", postVGHandler)

@@ -3,6 +3,8 @@ const {Videogame, Genre} = require("../db")
 const axios = require("axios")
 const { API, API_KEY} = process.env
 
+const games = []
+
 const fixResults = (obj) =>{
     return {
         id: obj.id,
@@ -34,15 +36,19 @@ const fixPlatforms = (arr) =>{
     return platforms
 }
 
-const getVideoGamesApi = async () => {
+const getVideoGamesApi = async (page=1) => {
     try {
-        const {data} = await axios(`${API}/games?key=${API_KEY}`)
-        const {results} = data
-        const videogames = []
-        for(let i = 0; i < results.length; i++){
-            videogames.push(fixResults(results[i]))
+        if(!games.length){
+            for(let i = 1; i <= 5; i++){
+                const {data} = await axios(`${API}/games?page=${i}&key=${API_KEY}`)
+                const {results} = data
+                for(let i = 0; i < results.length; i++){
+                    games.push(fixResults(results[i]))
+                }
+            }
         }
-        return videogames
+        const slice = (page - 1) * 15
+        return games.slice(slice, 15*page)
     } catch (error) {
         throw new Error(`No se ha podido conectar a la API; error: ${error.message}`)
     }
@@ -50,19 +56,28 @@ const getVideoGamesApi = async () => {
 
 const getVideoGamesId = async (id) => {
     try {
-        const {data} = await axios(`${API}/games/${id}?key=${API_KEY}`)
-        const videogames = fixResults(data)
-        return videogames
+        if(!games.length) await getVideoGamesApi()
+        for(let i = 0; i<= games.length; i++){
+            if(games[i].id==id) return games[i]
+    }
+        throw new Error("No se encontro juego")
     } catch (error) {
         throw new Error(`No se ha encontrado juego con ID ${id}; error: ${error.message}`)
     } 
 }
 
-const getVideoGamesName = async (name) => {
+const getVideoGamesName = async (name, page) => {
     try {
-        const {data} = await axios(`${API}/games?search=${name}?key=${API_KEY}`)
-        const videogames = fixResults(data)
-        return videogames
+        if(!games.length) {
+            let response = await getVideoGamesApi(page)
+            if(!name) return response
+        }
+        if(name){
+            const search = games.filter(game => game.name.toLowerCase().includes(name.toLowerCase()))
+            if(!search.length) throw new Error("No se encontraron coincidencias ")
+            if(search.length) return search
+        }
+        if(!name) return getVideoGamesApi(page)
     } catch (error) {
         throw new Error(`No se ha encontrado el juego ${name}, error: ${error.message}`)
     }

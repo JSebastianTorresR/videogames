@@ -1,6 +1,5 @@
 const initialState = {
     currentPage: 1,
-    elementsPerPage: 15,
     videoGames: [],
     favorites: [],
     currentGame: {},

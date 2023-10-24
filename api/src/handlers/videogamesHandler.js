@@ -1,13 +1,6 @@
-const { getVideoGamesApi, getVideoGamesName, getVideoGamesId, postVideoGame} = require("../controllers/videogamesController")
+const { getVideoGamesName, getVideoGamesId, postVideoGame} = require("../controllers/videogamesController")
 
-const getVGApiHandler = async (req, res) => {
-    try {
-        const data = await getVideoGamesApi()
-        return res.status(200).json(data)
-    } catch (error) {
-        return res.status(400).json({error: error.message})
-    }
-}
+
 const getVGIdHandler = async (req, res) => {
     const {id} = req.params
     try {
@@ -18,9 +11,9 @@ const getVGIdHandler = async (req, res) => {
     }
 }
 const getVGNameHandler = async (req, res) => {
-    const {name} = req.query
+    const {name, page} = req.query
     try {
-        const data = await getVideoGamesName(name)
+        const data = await getVideoGamesName(name, page)
         return res.status(200).json(data)
     } catch (error) {
         return res.status(400).json({error: error.message})
@@ -37,7 +30,6 @@ const postVGHandler = async (req,res) => {
     }
 }
 module.exports = {
-    getVGApiHandler,
     getVGIdHandler,
     getVGNameHandler,
     postVGHandler
