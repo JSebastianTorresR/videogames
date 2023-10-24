@@ -55,3 +55,31 @@ export const prevPage = () => {
         type: "PREV_PAGE"
     }
 }
+
+
+const search = async (name) =>{
+    const {data} = await axios.get(`${API}?name=${name}`)
+    return data
+}
+
+export const searchGames = (name) => async (dispatch) => {
+    try {
+        const response = await search(name)
+        dispatch({
+            type: "SEARCH_RESULT_SUCCES",
+            payload: response
+        })
+    } catch (error) {
+        dispatch({
+            type: "SEARCH_RESULT_ERROR",
+            error: error.message
+        })
+    }
+}
+
+export const setSearch = (name) => {
+    return{
+        type: "SET_SEARCH",
+        payload: name
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import Menu from "./Menu"
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
@@ -23,6 +24,7 @@ function CardContainer({videoGames, searchResults }) {
   if(searchResults.length){
     return (
       <section >
+          <Menu />
           <div className='cards-container'>
           {
             searchResults.map(game => (
@@ -36,6 +38,7 @@ function CardContainer({videoGames, searchResults }) {
 
   return (
     <section >
+        <Menu />
         <div className='cards-container'>
         {
           videoGames.map(game => (

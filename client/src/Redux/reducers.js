@@ -31,6 +31,16 @@ const Reducer = (state = initialState, action) => {
                 ...state,
                 currentPage: state.currentPage -1
             }
+        case  "SET_SEARCH":
+            return {
+                ...state,
+                search: action.payload
+            }
+        case "SEARCH_RESULT_SUCCES":
+            return{
+                ...state,
+                searchResults: action.payload
+            }
         default:
             return state
         }
