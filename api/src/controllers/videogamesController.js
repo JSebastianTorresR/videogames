@@ -54,7 +54,7 @@ const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null, orig
         let auxGames
         let genreFilter
 
-        if(filter){
+        if((filter && genre)||(filter&&origin)){
             if (genre){
                 genreFilter = games.filter(game => game.genres.some(gr => gr == genre))}
                 if(!origin) copyGames = [...genreFilter]

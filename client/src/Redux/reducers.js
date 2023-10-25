@@ -5,8 +5,10 @@ const initialState = {
     currentGame: {},
     search: "",
     searchResults: [],
-    filter: null,
+    filter: 1,
     sort: null,
+    genre: null,
+    origin: null
 }
 
 const Reducer = (state = initialState, action) => {
@@ -39,6 +41,7 @@ const Reducer = (state = initialState, action) => {
                 search: action.payload
             }
         case "SEARCH_RESULT_SUCCES":
+            if(state.search.length <1) return{...state, searchResults: []}
             return{
                 ...state,
                 searchResults: action.payload

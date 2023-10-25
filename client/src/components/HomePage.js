@@ -7,20 +7,24 @@ import NavBar from './NavBar'
 
 const mapStateToProps = state => {
   return{
-    currentPage: state.currentPage
+    currentPage: state.currentPage,
+    sort: state.sort,
+    genre: state.genre,
+    filter: state.filter,
+    origin: state.origin
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGames: (currentPage) => dispatch(getGamesAsync(currentPage)),
+    getGames: (currentPage, sort, genre, filter, origin) => dispatch(getGamesAsync(currentPage, sort, genre, filter, origin)),
   }
 }
 
-function HomePage({currentPage, getGames}) {
+function HomePage({currentPage, sort, genre, filter, origin, getGames}) {
   useEffect(()=>{
-    getGames(currentPage)
-  }, [getGames, currentPage])
+    getGames(currentPage, sort, genre, filter, origin)
+  }, [getGames, currentPage, sort, genre, filter, origin])
 
   return (
     <div>

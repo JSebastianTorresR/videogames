@@ -2,14 +2,20 @@ import axios from "axios";
 export const API ="http://localhost:3001/videogames"
 
 
-const getVideoGames = async (page) =>{
-    const {data} = await axios.get(`${API}?page=${page}`)
+const getVideoGames = async (page, sort, genre, filter, origin) =>{
+    let parameters = ""
+    console.log(sort)
+    if(sort) parameters += `&sort=${sort}`
+    if(genre) parameters += `&genre=${genre}`
+    if(filter) parameters += `&filter=${filter}`
+    if(origin) parameters += `&origin=${origin}`
+    const {data} = await axios.get(`${API}?page=${page}${parameters}`)
     return data
 }
 
-export const getGamesAsync = (currentPage, sort) => async (dispatch) => {
+export const getGamesAsync = (currentPage, sort, genre, filter, origin ) => async (dispatch) => {
     try {
-        const apiGames = await getVideoGames(currentPage, sort);
+        const apiGames = await getVideoGames(currentPage, sort, genre, filter, origin);
         dispatch({
             type: "GET_VIDEOGAMES_SUCCES",
             payload: apiGames,
