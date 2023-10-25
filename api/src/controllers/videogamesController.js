@@ -37,7 +37,7 @@ const fixPlatforms = (arr) =>{
     return platforms
 }
 
-const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null) => {
+const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null, origin=null) => {
     try {
         if(!games.length){
             for(let i = 1; i <= 5; i++){
@@ -51,13 +51,26 @@ const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null) => {
         const slice = (page - 1) * 15
 
         let copyGames
+        let auxGames
         let genreFilter
 
         if(filter){
             if (genre){
                 genreFilter = games.filter(game => game.genres.some(gr => gr == genre))}
-            copyGames = [...genreFilter]
+                if(!origin) copyGames = [...genreFilter]
+            if (origin && genre){
+                auxGames = [...genreFilter]
+                let originFilter = auxGames.filter(game => game.origin.map(gr => gr == origin))
+                copyGames = [...originFilter]
+            }
+            if(origin){
+                let originFilter = games.filter(game => game.origin.map(gr => gr == origin))
+                copyGames = [...originFilter]
+            }
+        }else{
+            copyGames = [...games]
         }
+
 
         switch(sort){
             case "A-Z":
