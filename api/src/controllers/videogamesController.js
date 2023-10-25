@@ -13,7 +13,8 @@ const fixResults = (obj) =>{
         image: obj.background_image,
         released: obj.released,
         rating: obj.rating,
-        genres: fixGenres(obj.genres)
+        genres: fixGenres(obj.genres),
+        origin: "API"
     }
 }
 
@@ -36,7 +37,7 @@ const fixPlatforms = (arr) =>{
     return platforms
 }
 
-const getVideoGamesApi = async (page=1, sort="A-Z") => {
+const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null) => {
     try {
         if(!games.length){
             for(let i = 1; i <= 5; i++){
@@ -47,10 +48,60 @@ const getVideoGamesApi = async (page=1, sort="A-Z") => {
                 }
             }
         }
-        if(sort == "A-Z")return [...games].sort((x,y) => x.name.localCompare(y.name))
-        if(sort == "Z-A")games.reverse()
         const slice = (page - 1) * 15
-        return games.slice(slice, 15*page)
+
+        let copyGames
+        let genreFilter
+
+        if(filter){
+            if (genre){
+                genreFilter = games.filter(game => game.genres.some(gr => gr == genre))}
+            copyGames = [...genreFilter]
+        }
+
+        switch(sort){
+            case "A-Z":
+                return copyGames.sort(function (x, y) {
+                    if (x.name < y.name) {
+                        return -1;
+                    }
+                    if (x.name > y.name) {
+                        return 1;
+                    }
+                    return 0;}).slice(slice, 15*page)
+
+            case "Z-A":
+                return copyGames.sort(function (x, y) {
+                    if (x.name < y.name) {
+                        return 1;
+                    }
+                    if (x.name > y.name) {
+                        return -1;
+                    }
+                    return 0;}).slice(slice, 15*page)
+            case "5-0":
+                return copyGames.sort(function (x, y) {
+                    if (x.rating < y.rating) {
+                        return 1;
+                    }
+                    if (x.rating > y.rating) {
+                        return -1;
+                    }
+                    return 0;}).slice(slice, 15*page)
+            case "0-5":
+                return copyGames.sort(function (x, y) {
+                    if (x.rating < y.rating) {
+                        return -1;
+                    }
+                    if (x.rating > y.rating) {
+                        return 1;
+                    }
+                    return 0;}).slice(slice, 15*page)
+            default:
+                if(filter) return copyGames.slice(slice, 15*page)
+                return games.slice(slice, 15*page)
+                    
+        }
     } catch (error) {
         throw new Error(`No se ha podido conectar a la API; error: ${error.message}`)
     }
@@ -68,10 +119,10 @@ const getVideoGamesId = async (id) => {
     } 
 }
 
-const getVideoGamesName = async (name, page, sort) => {
+const getVideoGamesName = async (name, page=1, sort, filter, genre, origin) => {
     try {
         if(!games.length) {
-            let response = await getVideoGamesApi(page, sort)
+            let response = await getVideoGamesApi(page, sort, filter, genre, origin)
             if(!name) return response
         }
         if(name){
@@ -79,7 +130,7 @@ const getVideoGamesName = async (name, page, sort) => {
             if(!search.length) throw new Error("No se encontraron coincidencias ")
             if(search.length) return search
         }
-        if(!name) return getVideoGamesApi(page)
+        if(!name) return getVideoGamesApi(page, sort, filter, genre, origin)
     } catch (error) {
         throw new Error(`No se ha encontrado el juego ${name}, error: ${error.message}`)
     }
