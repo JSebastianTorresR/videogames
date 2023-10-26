@@ -25,7 +25,7 @@ const Reducer = (state = initialState, action) => {
                 currentGame: action.payload
             }
         case "NEXT_PAGE":
-            if(state.currentPage === 7) return state
+            if(state.videoGames.length < 15) return state
             return{
                 ...state,
                 currentPage: state.currentPage + 1

@@ -11,9 +11,9 @@ const getVGIdHandler = async (req, res) => {
     }
 }
 const getVGNameHandler = async (req, res) => {
-    const {name, page, sort, filter, genre} = req.query
+    const {name, page, sort, filter, genre, origin} = req.query
     try {
-        const data = await getVideoGamesName(name, page, sort, filter, genre)
+        const data = await getVideoGamesName(name, page, sort, filter, genre, origin)
         return res.status(200).json(data)
     } catch (error) {
         return res.status(400).json({error: error.message})
