@@ -40,11 +40,12 @@ const fixPlatforms = (arr) =>{
 const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null, origin=null) => {
     try {
         if(!games.length){
-            for(let i = 1; i <= 5; i++){
-                const {data} = await axios(`${API}/games?page=${i}&key=${API_KEY}`)
+            for(let i = 1; i <= 3; i++){
+                const {data} = await axios(`${API}/games?page=${i}&key=${API_KEY}&page_size=34`)
                 const {results} = data
                 for(let i = 0; i < results.length; i++){
                     games.push(fixResults(results[i]))
+                    if(games.length == 100) break
                 }
             }
         }
@@ -63,9 +64,8 @@ const getVideoGamesApi = async (page=1, sort=null, filter=null, genre=null, orig
                 let originFilter = auxGames.filter(game => game.origin == origin)
                 copyGames = [...originFilter]
             }
-            if(origin){
+            if(origin && !genre){
                 let originFilter = games.filter(game => game.origin == origin)
-                console.log(originFilter)
                 copyGames = [...originFilter]
             }
         }else{

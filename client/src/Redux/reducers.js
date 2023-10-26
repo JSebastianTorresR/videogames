@@ -9,7 +9,19 @@ const initialState = {
     sort: null,
     genre: null,
     origin: null,
-    optionGenre: []
+    optionGenre: [],
+    form: {
+        input: {
+            name: "",
+            image: "",
+            description: "",
+            platforms: [],
+            released: 0,
+            rating: 0,
+            genres: [],
+        },
+        errors: {        }
+    }
 }
 
 const Reducer = (state = initialState, action) => {
@@ -66,6 +78,17 @@ const Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 optionGenre: action.payload
+            }
+        case  "SET_INPUT":
+            return {
+                ...state,
+                form:{
+                    ...state.form,
+                    input:{
+                        ...state.form.input,
+                        [action.value]: action.payload
+                    } 
+                }
             }
         default:
             return state

@@ -30,7 +30,7 @@ function SearchBar ({search, searchText, searchGames}) {
   return (
     <div>
       <form onSubmit={handleSubmit} className='form-search'>
-        <input type="text" onChange={handleChange} value={search} id="search-input" placeholder='Buscar Pokemon...'/>
+        <input type="text" onChange={handleChange} value={search} id="search-input" placeholder='Buscar Videojuego...'/>
         <button type="submit" id="search-button">Search</button>
       </form>
     </div>

@@ -126,3 +126,19 @@ export const setSearch = (name) => {
         payload: name
     }
 }
+
+export const setInput = (value, info) => {
+    return{
+        type: "SET_INPUT",
+        value,
+        payload: info
+    }
+}
+
+export const setErrors = (value, info) => {
+    return{
+        type: "SET_INPUT_ERROR",
+        value,
+        payload: info
+    }
+}
