@@ -4,7 +4,6 @@ export const API ="http://localhost:3001/videogames"
 
 const getVideoGames = async (page, sort, genre, filter, origin) =>{
     let parameters = ""
-    console.log(sort)
     if(sort) parameters += `&sort=${sort}`
     if(genre) parameters += `&genre=${genre}`
     if(filter) parameters += `&filter=${filter}`
@@ -28,6 +27,25 @@ export const getGamesAsync = (currentPage, sort, genre, filter, origin ) => asyn
     }
 };
 
+const getGenreOptions = async () => {
+    const {data} = await axios("http://localhost:3001/genres")
+    return data
+}
+
+export const getGenreAsync = () => async (dispatch) => {
+    try {
+        const gr = await getGenreOptions()
+        dispatch({
+            type: "GET_GR_OPTIONS",
+            payload: gr
+        })
+    } catch (error) {
+        dispatch({
+            type: "GET_GR_ERROR",
+            error: error.message
+        })
+    }
+}
 
 const getGameId = async (id) => {
     const {data} = await axios.get(`${API}/${id}`)
@@ -49,7 +67,6 @@ export const getGameIdAsync = (id) => async (dispatch) => {
     }
 }
 
-
 export const nextPage = () => {
     return {
         type: "NEXT_PAGE"
@@ -61,7 +78,6 @@ export const prevPage = () => {
         type: "PREV_PAGE"
     }
 }
-
 
 const search = async (name) =>{
     const {data} = await axios.get(`${API}?name=${name}`)
@@ -80,6 +96,27 @@ export const searchGames = (name) => async (dispatch) => {
             type: "SEARCH_RESULT_ERROR",
             error: error.message
         })
+    }
+}
+
+export const setSort = type => {
+    return{
+        type: "SET_SORT",
+        payload: type
+    }
+}
+
+export const setGenre = type => {
+    return{
+        type: "SET_GENRE",
+        payload: type
+    }
+}
+
+export const setOrigin = type => {
+    return{
+        type: "SET_ORIGIN",
+        payload: type
     }
 }
 

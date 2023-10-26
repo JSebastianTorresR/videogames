@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 
 
 function CardContainer({videoGames, searchResults }) {
-  if (!videoGames.length) {
+  if (!videoGames.length){
     return (
     <section>
       <div className='cards-container'>

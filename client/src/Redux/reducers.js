@@ -8,7 +8,8 @@ const initialState = {
     filter: 1,
     sort: null,
     genre: null,
-    origin: null
+    origin: null,
+    optionGenre: []
 }
 
 const Reducer = (state = initialState, action) => {
@@ -45,6 +46,26 @@ const Reducer = (state = initialState, action) => {
             return{
                 ...state,
                 searchResults: action.payload
+            }
+        case  "SET_GENRE":
+            return {
+                ...state,
+                genre: action.payload
+            }
+        case  "SET_SORT":
+            return {
+                ...state,
+                sort: action.payload
+            }
+        case  "SET_ORIGIN":
+            return {
+                ...state,
+                origin: action.payload
+            }
+        case  "GET_GR_OPTIONS":
+            return {
+                ...state,
+                optionGenre: action.payload
             }
         default:
             return state

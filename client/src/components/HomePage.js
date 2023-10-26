@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {connect} from "react-redux"
 import {Link} from "react-router-dom"
-import {getGamesAsync} from "../Redux/actions"
+import {getGamesAsync, getGenreAsync} from "../Redux/actions"
 import CardContainer from './CardContainer'
 import NavBar from './NavBar'
 
@@ -18,13 +18,15 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getGames: (currentPage, sort, genre, filter, origin) => dispatch(getGamesAsync(currentPage, sort, genre, filter, origin)),
+    getGr: () => dispatch(getGenreAsync())
   }
 }
 
-function HomePage({currentPage, sort, genre, filter, origin, getGames}) {
+function HomePage({currentPage, sort, genre, filter, origin, getGames, getGr}) {
   useEffect(()=>{
     getGames(currentPage, sort, genre, filter, origin)
-  }, [getGames, currentPage, sort, genre, filter, origin])
+    getGr()
+  }, [getGames, currentPage, sort, genre, filter, origin, getGr])
 
   return (
     <div>
